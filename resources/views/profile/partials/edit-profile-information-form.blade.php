@@ -17,21 +17,22 @@
 
 
         <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-            {{ __('Add Inventory') }}
+            {{ __('Edit Inventory') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __('Update your inventory information') }}
+            {{ __('Edit your inventory information') }}
         </p>
     </header>
-{{-- {{$category}} --}}
-    <form action="{{ url('categories/create') }}" method="POST" class="mt-6 space-y-6">
+{{$categories}}
+    <form action="{{ url('categories/'. $category->$id.'/edit') }}" method="POST" class="mt-6 space-y-6">
         @csrf
+        @method('PUT')
         <!-- Remove the @method('patch') line -->
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" required autofocus
-                autocomplete="name" value="{{ old('name') }}" />
+                autocomplete="name" value="{{ $category->name }}" />
             @error('name')
                 <span class="text-danger"> {{ $message }}</span>
             @enderror
@@ -40,7 +41,7 @@
         <div>
             <x-input-label for="type" :value="__('Choose what type')" />
             <select id="type" name="type" class="mt-1 block w-full" required autofocus autocomplete="type"
-                value="{{ old('type') }}">
+                value="{{ $category->description }}">
                 <option value="" disabled selected>Type of Item</option>
                 <option value="mouse">Mouse</option>
                 <option value="keyboard">Keyboard</option>
@@ -57,7 +58,7 @@
             <x-input-label for="serial_number" :value="__('Serial Number')" />
             <x-text-input id="serial_number" name="serial_number" type="text" class="mt-1 block w-full" required
                 autofocus autocomplete="serial number" title="Please enter a 5-digit number"
-                value="{{ old('serial_number') }}" />
+                value="{{ $category->serial_number }}" />
             @error('serial_number')
                 <span class="text-danger"> {{ $message }}</span>
             @enderror
@@ -72,7 +73,7 @@
                 <option value="For Repair">For Repair</option> <!-- Corrected value -->
                 <option value="Dispose">Dispose</option>
             </select>
-
+            value="{{ $category->status }}" />
             @error('status')
                 <span class="text-danger"> {{ $message }}</span>
             @enderror
@@ -83,7 +84,7 @@
 
             @if (session('status') === 'profile-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400">{{ __('Saved.') }}</p>
+                    class="text-sm text-gray-600 dark:text-gray-400">{{ __('Update.') }}</p>
             @endif
         </div>
     </form>

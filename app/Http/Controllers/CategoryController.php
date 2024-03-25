@@ -9,9 +9,10 @@ class CategoryController extends Controller
 {
     public function index()
     {
+        // $categories = Category::get();
+        // return $categories;
         $categories = Category::get();
-        return $categories;
-        return view('welcome');
+        return view('welcome', compact('categories'));
     }
 
     public function create()
@@ -38,5 +39,32 @@ class CategoryController extends Controller
         $category->save();
 
         return redirect('categories/create')->with('status', 'Category Created');
+    }
+
+    public function edit(int $id)
+    {
+        $category = Category::findOrFail($id);
+        // return $category;
+        return view('category.edit', compact('category'));
+    }
+
+
+
+    public function update(Request $request, int $id)
+    {
+        $request->validate([
+            'name' => 'required|max:255|string',
+            'type' => 'required|in:mouse,keyboard,monitor,printer',
+            'serial_number' => 'required|integer',
+            'status' => 'required|in:Working,For Repair,Dispose'
+        ]);
+
+        Category::create([
+            'name' => 'required|max:255|string',
+            'type' => 'required|in:mouse,keyboard,monitor,printer',
+            'serial_number' => 'required|integer',
+            'status' => 'required|in:Working,For Repair,Dispose'
+        ]);
+
     }
 }

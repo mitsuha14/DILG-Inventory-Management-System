@@ -85,10 +85,9 @@
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $item->status }}
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    <button
-                                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                                    <a href="{{url('categories/'.$item->id.'/edit')}}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
                                         Edit
-                                    </button>
+                                    </a>
                                 </td>
                                 <td class="px-6 py-4 text-center">
                                     <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
