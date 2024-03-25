@@ -21,16 +21,17 @@
                 </button>
             </div>
         </div>
-
-        <div class="py-4 sm:py-1">
-            <div
-                class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-center items-center">
-                <input type="text" placeholder="Search..."
-                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                <button
-                    class="bg-indigo-600 text-white px-4 py-2 ml-2 rounded-md shadow-sm hover:bg-indigo-700">Search</button>
+        <form type="GET" action="{{ url('/search') }}">
+            <div class="py-4 sm:py-1">
+                <div
+                    class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-center items-center">
+                    <input type="text" name="query" placeholder="Search..."
+                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <button
+                        type="submit" class="bg-indigo-600 text-white px-4 py-2 ml-2 rounded-md shadow-sm hover:bg-indigo-700">Search</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 
     <div class="py-4 sm:py-1 max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -72,23 +73,29 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                         @foreach ($ims as $item)
-                        <tr>
-                            <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{$item->id}}</td>
-                            <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{$item->name}}</td>
-                            <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{$item->type}}</td>
-                            <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{$item->serial_number}}</td>
-                            <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{$item->status}}</td>
-                            <td class="px-6 py-4 text-center">
-                                <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-                                    Edit
-                                </button>
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
-                                    Delete
-                                </button>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $item->id }}
+                                </td>
+                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $item->name }}
+                                </td>
+                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $item->type }}
+                                </td>
+                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">
+                                    {{ $item->serial_number }}</td>
+                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $item->status }}
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <button
+                                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                                        Edit
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>

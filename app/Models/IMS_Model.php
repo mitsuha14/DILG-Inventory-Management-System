@@ -17,4 +17,12 @@ class IMS_Model extends Model
         'serial_number',
         'status'
     ];
+
+    /**
+     * Get the category that belongs to the IMS_Model.
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
