@@ -4,11 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IMS_Controller;
 use App\Http\Controllers\ProfileController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/dashboard', [IMS_Controller::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/', [App\Http\Controllers\CategoryController::class, 'index']);
+Route::get('categories/create', [App\Http\Controllers\CategoryController::class, 'create']);
+Route::post('categories/create', [App\Http\Controllers\CategoryController::class, 'store']);
+
+
+// Route::get('/ ', function () {
+//     return view('welcome');
+// });
+
+Route::get('dashboard', [IMS_Controller::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/search', [IMS_Controller::class, 'search'])->name('search');
 
 Route::middleware('auth')->group(function () {

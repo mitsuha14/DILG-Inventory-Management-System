@@ -21,7 +21,7 @@
                 </a>
             </div>
         </div>
-        <form type="GET" action="{{ url('') }}">
+        <form type="GET" action="">
             <div class="py-4 sm:py-1">
                 <div
                     class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-center items-center">
