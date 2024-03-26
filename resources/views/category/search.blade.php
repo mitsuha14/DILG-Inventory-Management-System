@@ -40,7 +40,6 @@
     <div class="py-4 sm:py-1 max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-blue-500 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <form action="" class="overflow-x-auto">
-                {{-- {{$ims}} --}}
                 <table class="min-w-full divide-y divide-gray-200 text-xs sm:text-sm md:text-base">
                     <thead>
                         <tr>
@@ -75,32 +74,32 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                        @foreach ($ims as $item)
+                        @foreach ($products as $product)
                             <tr>
-                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $item->id }}
+                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $product->id }}
                                 </td>
-                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $item->name }}
+                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $product->name }}
                                 </td>
-                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $item->type }}
+                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $product->type }}
                                 </td>
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">
-                                    {{ $item->serial_number }}</td>
-                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $item->status }}
+                                    {{ $product->serial_number }}</td>
+                                <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">
+                                    {{ $product->status }}
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    <a href="{{ url('categories/' . $item->id . '/edit') }}"
+                                    <a href="{{ url('categories/' . $product->id . '/edit') }}"
                                         class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
                                         Edit
                                     </a>
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    <a href="{{ url('categories/' . $item->id . '/delete') }}"
-                                        onclick="return confirm('Are you sure you want to delete id {{ $item->id }}?')"
+                                    <a href="{{ url('categories/' . $product->id . '/delete') }}"
+                                        onclick="return confirm('Are you sure you want to delete id {{ $product->id }}?')"
                                         class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
                                         Delete
                                     </a>
                                 </td>
-
                             </tr>
                         @endforeach
                     </tbody>
@@ -108,5 +107,4 @@
             </form>
         </div>
     </div>
-
 </x-app-layout>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
+
 class CategoryController extends Controller
 {
     public function index()
@@ -51,8 +52,13 @@ class CategoryController extends Controller
             'status' => 'required|in:Working,For Repair,Dispose',
         ]);
 
-        return redirect('categories/create')->with('status', 'Table ' . $id .' Updated');
+        $category = Category::findOrFail($id);
+        $category->update($validatedData);
+
+        return redirect()->route('dashboard')->with('status', 'Category Updated Successfully');
     }
+
+
 
     public function destroy (int $id)
     {
@@ -61,4 +67,19 @@ class CategoryController extends Controller
 
         return redirect()->back()->with('status','Category Deletes');
     }
+
+    public function search(Request $request)
+    {
+        $search_text = $request->input('query');
+        $products = Category::where('name', 'LIKE', '%'.$search_text.'%')
+                            ->orWhere('type', 'LIKE', '%'.$search_text.'%')
+                            ->orWhere('serial_number', 'LIKE', '%'.$search_text.'%')
+                            ->orWhere('status', 'LIKE', '%'.$search_text.'%')
+                            ->get();
+
+        return view('category.search', compact('products'));
+    }
+
+
+
 }
