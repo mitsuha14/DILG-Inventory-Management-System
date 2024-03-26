@@ -12,7 +12,9 @@
 
 
         @if (session('status'))
-            <div class="alert alert-success">{{ session('status') }}</div>
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                {{ session('status') }}
+            </div>
         @endif
 
 
@@ -24,7 +26,7 @@
             {{ __('Update your inventory information') }}
         </p>
     </header>
-{{-- {{$category}} --}}
+    {{-- {{$category}} --}}
     <form action="{{ url('categories/create') }}" method="POST" class="mt-6 space-y-6">
         @csrf
         <!-- Remove the @method('patch') line -->

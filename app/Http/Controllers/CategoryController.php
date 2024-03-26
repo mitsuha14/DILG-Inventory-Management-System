@@ -9,9 +9,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        // $categories = Category::get();
-        // return $categories;
-        $categories = Category::get();
+        $categories = Category::all();
         return view('welcome', compact('categories'));
     }
 
@@ -22,49 +20,45 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        // Validate incoming request data
         $validatedData = $request->validate([
             'name' => 'required|max:255|string',
             'type' => 'required|in:mouse,keyboard,monitor,printer',
-            'serial_number' => 'required|integer',
-            'status' => 'required|in:Working,For Repair,Dispose', // Ensure status matches the provided options
+            'serial_number' => 'required|max:255|string',
+            'status' => 'required|in:Working,For Repair,Dispose',
         ]);
 
-        // Create a new category instance
-        $category = new Category();
-        $category->name = $request->name;
-        $category->type = $request->type;
-        $category->serial_number = $request->serial_number;
-        $category->status = $request->status;
-        $category->save();
-
-        return redirect('categories/create')->with('status', 'Category Created');
+        try {
+            Category::create($validatedData);
+            return redirect('categories/create')->with('status', 'Category Created');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Error creating category.'])->withInput();
+        }
     }
 
-    public function edit(int $id)
+    public function edit($id)
     {
         $category = Category::findOrFail($id);
         // return $category;
         return view('category.edit', compact('category'));
     }
 
-
-
     public function update(Request $request, int $id)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|max:255|string',
             'type' => 'required|in:mouse,keyboard,monitor,printer',
-            'serial_number' => 'required|integer',
-            'status' => 'required|in:Working,For Repair,Dispose'
+            'serial_number' => 'required|max:255|string',
+            'status' => 'required|in:Working,For Repair,Dispose',
         ]);
 
-        Category::create([
-            'name' => 'required|max:255|string',
-            'type' => 'required|in:mouse,keyboard,monitor,printer',
-            'serial_number' => 'required|integer',
-            'status' => 'required|in:Working,For Repair,Dispose'
-        ]);
+        return redirect('categories/create')->with('status', 'Table ' . $id .' Updated');
+    }
 
+    public function destroy (int $id)
+    {
+        $category = Category::findOrFail($id);
+        $category->delete();
+
+        return redirect()->back()->with('status','Category Deletes');
     }
 }

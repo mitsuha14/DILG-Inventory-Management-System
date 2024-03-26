@@ -16,7 +16,8 @@
     <div class="flex justify-between items-center max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-1 text-center text-gray-900 dark:text-gray-100">
-                <a href="{{ url('categories/create') }}" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                <a href="{{ url('categories/create') }}"
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
                     Add Inventory
                 </a>
             </div>
@@ -27,8 +28,8 @@
                     class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg flex justify-center items-center">
                     <input type="text" name="query" placeholder="Search..."
                         class="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                    <button
-                        type="submit" class="bg-indigo-600 text-white px-4 py-2 ml-2 rounded-md shadow-sm hover:bg-indigo-700">Search</button>
+                    <button type="submit"
+                        class="bg-indigo-600 text-white px-4 py-2 ml-2 rounded-md shadow-sm hover:bg-indigo-700">Search</button>
                 </div>
             </div>
         </form>
@@ -85,15 +86,19 @@
                                 <td class="px-6 py-4 text-center text-gray-900 dark:text-gray-100">{{ $item->status }}
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    <a href="{{url('categories/'.$item->id.'/edit')}}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                                    <a href="{{ url('categories/' . $item->id . '/edit') }}"
+                                        class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
                                         Edit
                                     </a>
                                 </td>
                                 <td class="px-6 py-4 text-center">
-                                    <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
+                                    <a href="{{ url('categories/' . $item->id . '/delete') }}"
+                                        onclick="return confirm('Are you sure you want to delete id {{ $item->id }}?')"
+                                        class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded">
                                         Delete
-                                    </button>
+                                    </a>
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>
